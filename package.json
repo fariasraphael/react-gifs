@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.23.3",
+    "giphy-api": "^2.0.2",
     "react": "16.2.0",
     "react-dom": "^16.4.2"
   },
