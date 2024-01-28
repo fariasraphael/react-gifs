@@ -15,6 +15,7 @@ class App extends Component {
     }
 
     this.search("sad baby")
+    this.changeGif = this.changeGif.bind(this);
   }
 
   search = (query) => {
@@ -30,22 +31,27 @@ class App extends Component {
     });
   }
 
-  render() {
-    const gifs = [
-        {id: 'jnQYWZ0T4mkhCmkzcn'},
-        {id: '5rcwnHg6PCwQPNp0bi'}
-      ];
+  changeGif(gifID) {
+      this.setState({
+        selectedGifId: gifID
+      });
+      console.log("APP", gifID)
+      }
+  
+  
+  
 
+  render() {
     return (
       <div>
         <div className="left-scene">
-          <SearchBar searchFunction={this.search}/>
+          <SearchBar searchFunction={this.search} />
           <div className="selected-gif">
-            <Gif id={this.state.selectedGifId}/>
+            <Gif id={this.state.selectedGifId} />
           </div>
         </div>
         <div className="right-scene">
-          <GifList gifs={this.state.gifs} />
+          <GifList gifs={this.state.gifs} gifClickedApp={this.changeGif} />
         </div>
       </div>
     );
