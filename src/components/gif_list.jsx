@@ -1,21 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Gif from './gif';
 
-import Gif from './gif.jsx';
-
-class GifList extends Component {
-	renderList = () => {
-		const {gifs, gifClickedApp} = this.props;
-
-		return gifs.map(gif => <Gif id={gif.id} key={gif.id} gifClickedGifList={gifClickedApp} />);
-	}
-	
-	render() {
-		return (
-			<div className="gif-list">
-				{this.renderList()}
-			</div>
-		);
- 	}
-}
+const GifList = (props) => {
+  return (
+    <div className="gif-list">
+      {props.gifs.map(gif => <Gif id={gif} key={gif} selectGif={props.selectGif} />)}
+    </div>
+  );
+};
 
 export default GifList;
