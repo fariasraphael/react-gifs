@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 class Gif extends Component {
 	handleClick = () => {
-    	if (this.props.gifClickedGifList) {
-      		this.props.gifClickedGifList(this.props.id);
+		const { id, gifClickedGifList } = this.props
+    	if (gifClickedGifList) {
+      		gifClickedGifList(id);
       		console.log("find me at gif")
     	}
   	}
