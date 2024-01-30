@@ -21,15 +21,18 @@ class App extends Component {
 
   fetchTrendingGifs = () => {
     giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').trending({
-    limit: 9,
-    rating: 'g',
-    }, (err, res) => {
-      console.log(res.data)
-      this.setState({
+      limit: 9,
+      rating: 'g',
+    })
+      .then((res) => {
+        this.setState({
         gifs: res.data
+        });
+      })
+     .catch((err) => {
+        console.error('Error fetching trending GIFs:', err);
       });
-  });
-  }
+   };
 
   search = (query) => {
     giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').search({
