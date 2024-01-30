@@ -19,6 +19,13 @@ class App extends Component {
     this.changeGif = this.changeGif.bind(this);
   }
 
+  componentDidMount() {
+    // Realiza a busca apenas se o array de gifs estiver vazio
+    if (this.state.gifs.length === 0) {
+      this.fetchTrendingGifs();
+    }
+  }
+
   fetchTrendingGifs = () => {
     giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').trending({
       limit: 9,
