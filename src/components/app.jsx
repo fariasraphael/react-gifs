@@ -26,12 +26,17 @@ class App extends Component {
     }
   }
 
-  fetchTrendingGifs = () => {
+fetchTrendingGifs = () => {
   const apiKey = 'p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X';
   const apiUrl = `https://api.giphy.com/v1/gifs/trending?limit=9&rating=g&api_key=${apiKey}`;
 
   fetch(apiUrl)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => {
       this.setState({
         gifs: data.data
