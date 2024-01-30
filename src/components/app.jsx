@@ -14,8 +14,21 @@ class App extends Component {
       selectedGifId: 'jnQYWZ0T4mkhCmkzcn'
     }
 
-    this.search("sad baby")
+    // this.search("sad baby");
+    this.fetchTrendingGifs();
     this.changeGif = this.changeGif.bind(this);
+  }
+
+  fetchTrendingGifs = () => {
+    giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').trending({
+    limit: 9,
+    rating: 'g',
+    }, (err, res) => {
+      console.log(res.data)
+      this.setState({
+        gifs: res.data
+      });
+  });
   }
 
   search = (query) => {
@@ -32,7 +45,7 @@ class App extends Component {
     } else {
       console.error('Unexpected or undefined response format from Giphy:', result);
     }
-  });
+    });
   }
 
   changeGif(gifID) {
