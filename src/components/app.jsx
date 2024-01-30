@@ -43,9 +43,10 @@ fetchTrendingGifs = () => {
       });
     })
     .catch(error => {
-      console.error('Error fetching trending GIFs:', error);
+      console.error('Error fetching trending GIFs:', error.message); // Adicionado para exibir a mensagem de erro
     });
 };
+
 
   search = (query) => {
     giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X', { https: true }).search({
