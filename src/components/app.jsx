@@ -42,7 +42,7 @@ class App extends Component {
    };
 
   search = (query) => {
-    giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').search({
+    giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X', { https: true }).search({
       q: query,
       rating: 'g',
       limit: 9
