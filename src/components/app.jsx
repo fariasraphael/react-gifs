@@ -27,19 +27,20 @@ class App extends Component {
   }
 
   fetchTrendingGifs = () => {
-    giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').trending({
-      limit: 9,
-      rating: 'g',
-    })
-      .then((res) => {
-        this.setState({
-        gifs: res.data
-        });
-      })
-     .catch((err) => {
-        console.error('Error fetching trending GIFs:', err);
+  const apiKey = 'p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X';
+  const apiUrl = `https://api.giphy.com/v1/gifs/trending?limit=9&rating=g&api_key=${apiKey}`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({
+        gifs: data.data
       });
-   };
+    })
+    .catch(error => {
+      console.error('Error fetching trending GIFs:', error);
+    });
+};
 
   search = (query) => {
     giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X', { https: true }).search({
