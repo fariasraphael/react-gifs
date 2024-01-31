@@ -11,20 +11,15 @@ class App extends Component {
 
     this.state = {
       gifs:[],
-      selectedGifId: 'jnQYWZ0T4mkhCmkzcn'
+      selectedGifId: ""
     }
 
     // this.search("sad baby");
     this.fetchTrendingGifs();
     this.changeGif = this.changeGif.bind(this);
+    this.randomGif();
   }
 
-  componentDidMount() {
-    // Realiza a busca apenas se o array de gifs estiver vazio
-    if (this.state.gifs.length === 0) {
-      this.fetchTrendingGifs();
-    }
-  }
 
   fetchTrendingGifs = () => {
     giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').trending({
@@ -41,15 +36,27 @@ class App extends Component {
 
   search = (query) => {
     giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').search({
-      q: query,
+      limit: 9,
       rating: 'g',
-      limit: 9
-    }, (result) => {
+      q: query
+    }, (error, result) => {
+      //console.log(result.data)
       this.setState({
         gifs: result.data
       });
     });
-  };
+  }
+
+  randomGif = () => {
+    giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').random({
+      rating: 'g'
+    }, (error, result) => {
+      console.log(result.data.id)
+      this.setState({
+        selectedGifId: result.data.id
+      });
+    });
+  }
 
   changeGif(gifID) {
       this.setState({
@@ -57,9 +64,6 @@ class App extends Component {
       });
       console.log("APP", gifID)
       }
-  
-  
-  
 
   render() {
     return (
