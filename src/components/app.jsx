@@ -35,6 +35,10 @@ class App extends Component {
 
 
   search = (query) => {
+      if (!query) {
+        this.fetchTrendingGifs();
+        return;
+      }
     giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').search({
       limit: 9,
       rating: 'g',
