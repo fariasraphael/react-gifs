@@ -26,44 +26,30 @@ class App extends Component {
     }
   }
 
-fetchTrendingGifs = () => {
-  const apiKey = 'p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X';
-  const apiUrl = `https://api.giphy.com/v1/gifs/trending?limit=9&rating=g&api_key=${apiKey}`;
-
-  fetch(apiUrl)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
+  fetchTrendingGifs = () => {
+    giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').trending({
+      limit: 9,
+      rating: 'g',
+    }, (err, res) => {
+      console.log(res.data)
       this.setState({
-        gifs: data.data
+        gifs: res.data
       });
-    })
-    .catch(error => {
-      console.error('Error fetching trending GIFs:', error.message); // Adicionado para exibir a mensagem de erro
     });
-};
+  };
 
 
   search = (query) => {
-    giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X', { https: true }).search({
+    giphy('p9wpXw9vFVlSUAE4rdzwCOGLkKp2Zd4X').search({
       q: query,
       rating: 'g',
       limit: 9
-    }, (error, result) => {
-      
-     if (result && result.data && Array.isArray(result.data)) {
+    }, (result) => {
       this.setState({
         gifs: result.data
       });
-    } else {
-      console.error('Unexpected or undefined response format from Giphy:', result);
-    }
     });
-  }
+  };
 
   changeGif(gifID) {
       this.setState({
